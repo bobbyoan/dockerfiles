@@ -38,6 +38,10 @@ RUN echo '<!DOCTYPE html>\
 # Expose the port
 EXPOSE 8080
 
-# Start nginx and firewalld
-CMD ["sh", "-c", "service firewalld start && nginx -g 'daemon off;'"]
+# Copy the script to start services
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
+# Set the entrypoint to the start script
+ENTRYPOINT ["/start.sh"]
 
